@@ -12,7 +12,7 @@ describe("Auth test suit", function () {
             expect(headerData).to.have.property("Content-Type").with.lengthOf(16);
             expect(headerData)
                 .to.have.property("X-Avangate-Authentication")
-                .with.lengthOf(74 + config.sellerId.length);
+                .with.lengthOf(119 + config.sellerId.length);
         });
     });
 });

@@ -26,7 +26,7 @@ describe("Ipn class tests", function () {
     describe("hmac()", function () {
         it("Returns hmac of a string using the secretKey", function () {
             let expanded = ipn.expand(toExpand);
-            let res = ipn.hmac(expanded);
+            let res = ipn.hmac(expanded, 'md5');
             expect(res).to.equal(ipnExpectedHash);
         });
     });
@@ -47,8 +47,21 @@ describe("Ipn class tests", function () {
 
 describe("Twocheckout interface ipn hash validation.", function () {
     describe("Twocheckout.validateIpnResponse() tests", function () {
+        it("Sha3-256 is valid.", function () {
+            const tco = new Twocheckout(ipnConfig);
+            let res = tco.validateIpnResponse(ipnCallbackReq);
+            expect(res).to.equal(true);
+        });
+        it("Sha256 is valid.", function () {
+            const tco = new Twocheckout(ipnConfig);
+            delete ipnCallbackReqClone["SIGNATURE_SHA3_256"];
+            let res = tco.validateIpnResponse(ipnCallbackReq);
+            expect(res).to.equal(true);
+        });
         it("Hash is valid.", function () {
             const tco = new Twocheckout(ipnConfig);
+            delete ipnCallbackReqClone["SIGNATURE_SHA3_256"];
+            delete ipnCallbackReqClone["SIGNATURE_SHA2_256"];
             let res = tco.validateIpnResponse(ipnCallbackReq);
             expect(res).to.equal(true);
         });
@@ -59,16 +72,6 @@ describe("Twocheckout interface ipn hash validation.", function () {
             let res = tco.validateIpnResponse(ipnCallbackReqClone);
             expect(res).to.equal(false);
         });
-        it("Hash is missing throws error.", function () {
-            const tco = new Twocheckout(ipnConfig);
-            ipnCallbackReqClone = JSON.parse(JSON.stringify(ipnCallbackReq)); //dirty :)
-            delete ipnCallbackReqClone["HASH"];
-            expect(function () {
-                tco.validateIpnResponse(ipnCallbackReqClone);
-            })
-                .to.throw(TwocheckoutError)
-                .with.property("code", "ipn_no_hash");
-        });
     });
 });
 
@@ -77,7 +80,7 @@ describe("Twocheckout interface ipn response.", function () {
         it("Ipn response is valid.", function () {
             const tco = new Twocheckout(ipnConfig);
             let res = tco.generateIpnResponse(ipnCallbackReq);
-            expect(res).to.be.a("string").with.lengthOf(68);
+            expect(res).to.be.a("string").with.lengthOf(113);
         });
         it("Ipn response generation throws exception.", function () {
             const tco = new Twocheckout(ipnConfig);

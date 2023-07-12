@@ -1,6 +1,6 @@
 {
     "name": "twocheckout-node-sdk",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "2Checkout by Verifone payment library",
     "main": "Twocheckout.js",
     "scripts": {
@@ -16,7 +16,6 @@
     "author": "2Checkout",
     "license": "MIT",
     "dependencies": {
-        "crypto-js": "^4.0.0",
         "date-format": "^3.0.0",
         "got": "^11.8.2",
         "jsonwebtoken": "^8.5.1"
@@ -24,6 +23,6 @@
     "devDependencies": {
         "chai": "^4.3.4",
         "chai-as-promised": "^7.1.1",
-        "mocha": "^8.3.2"
+        "mocha": "^10.2.0"
     }
 }

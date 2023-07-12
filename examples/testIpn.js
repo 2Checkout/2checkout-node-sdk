@@ -124,7 +124,7 @@ console.log("Ipn class manual usage example.");
 let expanded = ipn.expand(toExpand);
 console.log(expanded);
 
-let hash = ipn.hmac(expanded);
+let hash = ipn.hmac(expanded, 'md5');
 console.log(hash);
 
 console.log("Is ipn request signature valid:", ipn.isValid(params));
