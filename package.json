@@ -1,8 +1,8 @@
 {
     "name": "twocheckout-node-sdk",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "2Checkout by Verifone payment library",
-    "main": "Twocheckout.js",
+    "main": "twocheckout.js",
     "scripts": {
         "test": "mocha './test/**/*.spec.js'",
         "test-single": "mocha"
