@@ -3,7 +3,13 @@
 
 This is the current 2Checkout NodeJS SDK providing developers with a simple set of bindings to the 2Checkout 6.0 REST API, IPN and Convert Plus Signature API.
 
-To use, clone require in your script. All the features present in this library are used through a twocheckout.js instance which can be initialized with a configuration array.
+To use, add as a dependency to your package.json:
+
+```json
+"twocheckout": "2Checkout/2checkout-node-sdk#v1.1.1",
+```
+
+All the features present in this library are used through a twocheckout.js instance which can be initialized with a configuration array.
 
 ```js
 const Twocheckout = require("./twocheckout.js");
